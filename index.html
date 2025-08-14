@@ -38,7 +38,7 @@
 								<li><a href="#top" id="top-link"><span class="icon solid fa-home">Home</span></a></li>
 								<li><a href="#about" id="about-link"><span class="icon solid fa-user">About Me</span></a></li>
 								<li><a href="#research" id="research-link"><span class="icon solid fa-th-list">Research</span></a></li>
-								<li><a href="#publications" id="publication-link"><span class="icon solid fa-book-open">Recent Publications</span></a></li>
+								<!--<li><a href="#publications" id="publication-link"><span class="icon solid fa-book-open">Recent Publications</span></a></li>-->
 								<li><a href="#teaching" id="teaching-link"><span class="icon solid fa-book">Teaching and Supervision</span></a></li>
 								<li><a href="#miscellaneous" id="miscellaneous-link"><span class="icon solid fa-archive">Miscellaneous</span></a></li>
 								<!-- <li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">Contact</span></a></li> -->
@@ -119,51 +119,9 @@
 								<h2>Research</h2>
 							</header>
 
-							<h3 align="left"><strong>Exploring the impact of Haematoxylin and Eosin staining variability on sarcoma subtypes across multiple laboratories using Artificial Intelligence (AI)-based methods</strong></h3>
+							<h3 align="left"><strong>AI and for soft tissue sarcoma pathology</strong></h3>
 							
-							<p align="left">We have an exciting new collaboration with Google Health to explore sarcoma subtyping and the impact of colour variability across multiple laboratories in sarcoma pathology. This is accomplished by applying a combination of the Google Path Foundation model and other machine learning techniques on digitised histological slides to unravel the unique architectural and cytological nuances of these enigmatic tumours for the benefit of diagnosis. Our first pilot project is currently being undertaken by Dr Binghao Chai in collaboration with Prof. Adrienne Flanagan (UCL), Dr Tapabrata Chakraborty (The Alan Turing Institute) and Dr David Steiner (Google Health). Read more about the Path Foundation model <a href="https://research.google/blog/health-specific-embedding-tools-for-dermatology-and-pathology/" target="_blank" style="color: blue">here</a>, and their preprint <a href="https://arxiv.org/abs/2310.13259" target="_blank" style="color: blue">here</a>.</p>
-							
-							<br />
-							
-							<h3 align="left"><strong>Multi-SpinX: an advanced framework for automated tracking of mitotic spindles and kinetochores in multicellular environments</strong></h3>
-							
-							<p align="left">With the advent of advanced imaging technologies, research groups routinely generate terabytes of live-cell movies every year. Analysing these movies manually is not only tedious, it is also a waste of experienced researchers. Recognising this problem, several automated image analysis software tools are being developed but no full proof solution exists for high-resolution live-movies of dynamic subcellular structures that move in 3D. This is a particularly unique problem because of the temporal and spatial challenges in imaging along with phototoxicity which reduce the amount of information available for reliable automated analysis. Draviam Lab has been able to overcome this using a combination of guided modelling and deep learning methods developed to track mitotic spindles in 3-Dimensions (3D) through time (SpinX). </p>
-							
-							<br />
-							
-							<div class="row aln-center aln-middle">
-								<div class="col-10 col-12-mobile">
-									<article class="item">
-										<a class="image fit"><img src="images/spinx_demo.gif" alt="SpinX demo." /></a>
-										<header>
-											<h6>SpinX demo.</h6>
-										</header>
-									</article>
-								</div>
-							</div>
-							
-							<br />
-							
-							<p align="left">During mitosis, the microtubules of the mitotic spindle are tethered to chromosomes by a specialised macromolecular structure, the kinetochore that assembles on the centromeric region of chromosomes. The mitotic spindle is constantly changing shape and it undergoes movements independent from the kinetochores that are also moving within the spindle. The tracking challenge becomes computationally intensive due to either the crowding of objects within cells or the high-throughput nature of the study presenting many dividing cells next to each other. SpinX was limited to analysing single cells and spindles in metaphase. In response to the growing demand for a more adaptable tool that is suitable for high-throughput studies, we have now developed a framework, termed Multi-SpinX, to enhance the capabilities of SpinX. Multi-SpinX represents a significant expansion of our original framework, and is able to track spindles and kinetochores in a multiple-cell environment. This work was led by Dr Binghao Chai and was conducted in collaboration with Prof. Viji Draviam (Queen Mary University of London, QMUL), Prof Kozo Tanaka (Tohoku University), Christoforos Efstathiou (QMUL), Muntaqa Choudhury (QMUL), Kinue Kuniyasu (Tohoku University) and ZEISS. This project was funded by the Innovation UK KTP scheme and ZEISS. This research is available <a href="https://www.sciencedirect.com/science/article/pii/S0010482524017116" target="_blank" style="color: blue">here</a>. Other related publications are available <a href="https://doi.org/10.1016/j.tcb.2023.10.010" target="_blank" style="color: blue">here</a> (review paper, Trends in Cell Biology) and <a href="https://www.rms.org.uk/resource/ai-for-advanced-image-analysis.html" target="_blank" style="color: blue">here</a> (interview article, infocus Magazine from Royal Microscopical Society).</p>
-							
-							<br />
-							
-							<div class="row aln-center aln-middle">
-								<div class="col-10 col-12-mobile">
-									<article class="item">
-										<a class="image fit"><img src="images/multi_spinx.jpg" alt="Multi-SpinX." /></a>
-										<header>
-											<h6>Time-lapse images of consecutive frames illustrate the complex process of kinetochore tracking overlaid with spindle tracking. The frames are organised as follows: the original movie as a merge of the spindle (red) and kinetochore marker (centromere marker for chromosome 16, in green) displays the representative consecutive frames (first row), the tracked spindle with bounding boxes illustrates the spindle tracking outcome (second row), the tracked GFP with bounding boxes (red, marked by yellow arrow) depicts the kinetochores being tracked, with bounding boxes delineating the track location (third row), and the magnified consecutive frames highlighted with yellow arrows in the third row showcase sister kinetochores with two particle IDs (1 and 2) segregated into four kinetochores (1,2,3 and 4). Scale bar: 10 μm.</h6>
-										</header>
-									</article>
-								</div>
-							</div>
-							
-							<br />
-							
-							<h3 align="left"><strong>Using machine learning techniques on digitised histopathological images to distinguish lipoma (LP) from atypical lipomatous tumours (ALT)</strong></h3>
-							
-							<p align="left">Lipomas are benign neoplasms of fat and are amongst the most common tumours with an estimated incidence rate of 1 per 1000 people per year (Rydholm &amp Berg 1983, Weiss et al. 2007). They need to be distinguished from atypical lipomatous tumours (ALT) which are malignant and rare and present both a clinical and histological challenge. The distinction is made by assessing nuclear and subtle architectural features which require reviewing multiple sections and the use of ancillary genetic testing. Benign fatty tumours, therefore, present a considerable workload in the general pathology setting and the distinction from malignancy often require specialist review. This problem can be addressed by automated whole slide image (WSI) analysis. However, the paucicellular nature of the fatty tissues also presents a computational challenge.</p>
+							<p align="left">My research focuses on applying advanced AI techniques to the diagnosis and subtyping of soft tissue sarcomas and their mimics, with a particular emphasis on computational classification from digitised histopathology. Soft tissue sarcomas are rare, morphologically diverse tumours that present significant diagnostic challenges, often requiring expert review and ancillary testing. By leveraging modern deep learning techniques, including state-of-the-art foundation models, I aim to improve diagnostic accuracy, efficiency, and generalisability in real-world clinical settings.</p>
 							
 							<br />
 							
@@ -180,7 +138,7 @@
 							
 							<br />
 							
-							<p align="left">In order to explore the utility of machine learning and deep learning techniques on fatty tumour digital pathology for the diagnosis benefits, we developed and validated a computational pipeline for distinguishing these two types of fatty tumours at the slide-level. An ideal automatic pipeline should be able to predict the conventional lipomas with 100% accuracy with all other cases going to be manually reviewed including those unusual lipomas and the atypical lipomatous tumours. Although our research findings are not the case, they indicate that computational approaches have some ability to distinguish malignant atypical lipomatous tumours from benign lipomas just based on their histopathological images. In terms of the generalisability, the performance of this pipeline decreases when applied to the slides from different external labs. This work was led by Dr Binghao Chai and was conducted in collaboration with Dr Kevin Bryson and Dr Nischalan Pillay. This research is available <a href="https://discovery.ucl.ac.uk/id/eprint/10170583/" target="_blank" style="color: blue">here</a>.</p>
+							<p align="left">One strand of my work, conducted in collaboration with Google Health and The Alan Turing Institute, explores how variations in tissue staining and scanning protocols across laboratories affect the performance of AI models in pathology. Using sarcoma pathology as a challenging test case, this project evaluates multiple pan-cancer foundation models to understand their robustness and adaptability. The goal is to provide insights that can inform the development of AI systems capable of consistent and reliable performance across diverse clinical environments.</p>
 							
 							<br />
 							
@@ -196,11 +154,50 @@
 							</div>
 							
 							<br />
+							
+							<p align="left">Alongside this, I also investigate tumour classification approaches in soft tissue pathology, including methods that address common diagnostic challenges. An example is an earlier work (2019–2022) on developing computational pipelines to distinguish between benign lipomas and malignant atypical lipomatous tumours from whole slide images, a task that often requires detailed morphological assessment and specialist review (available <a href="https://discovery.ucl.ac.uk/id/eprint/10170583/" target="_blank" style="color: blue">here</a>). These complementary research directions, exploring colour-related techniques as well as advancing tumour classification methods, aim to pave the way for more reliable, adaptable, and clinically useful AI tools in digital pathology.</p>
+							
+							<br />
+							
+							<h3 align="left"><strong>Microscopy time-lapse image analysis of dynamic cellular structures</strong></h3>
+							
+							<p align="left">In addition to my work in digital pathology, I also conduct research in the analysis of high-resolution microscopy time-lapse images, particularly for studying the dynamic subcellular structures of live-cells. Advances in live-cell imaging technologies now allow researchers to capture large volumes of 3D and time-lapse data, revealing intricate biological processes in unprecedented detail. However, the complexity of these datasets (with structures moving in three dimensions, changing shape over time, and often existing in crowded environments and more) makes automated analysis both computationally challenging and essential for high-throughput studies. My work in this area aims to design and implement computational frameworks that enable robust, scalable, and accurate tracking of such structures, helping to unlock new biological insights while reducing the reliance on labor-intensive manual annotation.</p>
+							
+							<br />
+							
+							<div class="row aln-center aln-middle">
+								<div class="col-10 col-12-mobile">
+									<article class="item">
+										<a class="image fit"><img src="images/spinx_demo.gif" alt="SpinX demo." /></a>
+										<header>
+											<h6>SpinX demo.</h6>
+										</header>
+									</article>
+								</div>
+							</div>
+							
+							<br />
+							
+							<p align="left">As part of this research, I led the development of Multi-SpinX (available <a href="https://www.sciencedirect.com/science/article/pii/S0010482524017116" target="_blank" style="color: blue">here</a>), an advanced computational framework for automated tracking of mitotic spindles and kinetochores in multicellular environments. During mitosis, the mitotic spindle (a dynamic microtubule-based structure) orchestrates the segregation of chromosomes, which are attached via the kinetochore at their centromeric regions. Both structures undergo complex and often independent movements in 3D space over time, making them particularly challenging to track in crowded or high-throughput imaging experiments. Multi-SpinX extends the capabilities of the original SpinX system (available <a href="https://rupress.org/jcb/article/222/5/e202111094/213913/Deep-learning-techniques-and-mathematical-modeling" target="_blank" style="color: blue">here</a>), which was limited to single-cell metaphase analysis. The framework was developed in collaboration with Prof. Viji Draviam (Queen Mary University of London), Prof. Kozo Tanaka (Tohoku University), ZEISS, and other colleagues. Multi-SpinX is now integrated into <a href="https://www.zeiss.com/microscopy/en/products/software/arivis-pro.html" target="_blank" style="color: blue">ZEISS arivis Pro</a> and <a href="https://www.zeiss.com/microscopy/en/products/software/arivis-cloud-ai.html" target="_blank" style="color: blue">ZEISS arivis Cloud</a>, and provides a scalable solution for researchers studying spindle–kinetochore dynamics, enabling richer quantitative analyses of mitosis in complex multicellular contexts. Other related publications are available <a href="https://doi.org/10.1016/j.tcb.2023.10.010" target="_blank" style="color: blue">here</a> (review paper, Trends in Cell Biology) and <a href="https://www.rms.org.uk/resource/ai-for-advanced-image-analysis.html" target="_blank" style="color: blue">here</a> (interview article, infocus Magazine from Royal Microscopical Society).</p>
+							
+							<br />
+							
+							<div class="row aln-center aln-middle">
+								<div class="col-10 col-12-mobile">
+									<article class="item">
+										<a class="image fit"><img src="images/multi_spinx.jpg" alt="Multi-SpinX." /></a>
+										<header>
+											<h6>Time-lapse images of consecutive frames illustrate the complex process of kinetochore tracking overlaid with spindle tracking. The frames are organised as follows: the original movie as a merge of the spindle (red) and kinetochore marker (centromere marker for chromosome 16, in green) displays the representative consecutive frames (first row), the tracked spindle with bounding boxes illustrates the spindle tracking outcome (second row), the tracked GFP with bounding boxes (red, marked by yellow arrow) depicts the kinetochores being tracked, with bounding boxes delineating the track location (third row), and the magnified consecutive frames highlighted with yellow arrows in the third row showcase sister kinetochores with two particle IDs (1 and 2) segregated into four kinetochores (1,2,3 and 4). Scale bar: 10 μm.</h6>
+										</header>
+									</article>
+								</div>
+							</div>
+							
+							<br />
 
 						</div>
 					</section>
-
-				<!-- paper -->
+<!--
 					<section id="publications" class="two">
 						<div class="container">
 
@@ -229,6 +226,7 @@
 
 						</div>
 					</section>
+-->
 				
 				<!-- teaching -->
 					<section id="teaching" class="two">
