@@ -4,9 +4,6 @@
 @import 'libs/vendor';
 @import 'libs/breakpoints';
 @import 'libs/html-grid';
-@import url("fontawesome-all.min.css");
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,600");
-
 /*
 	Prologue by HTML5 UP
 	html5up.net | @ajlkn
@@ -100,15 +97,22 @@
 	// Based on css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
 		html {
 			box-sizing: border-box;
+			scroll-behavior: smooth;
 		}
 
 		*, *:before, *:after {
 			box-sizing: inherit;
 		}
 
+		@media (prefers-reduced-motion: reduce) {
+			html {
+				scroll-behavior: auto;
+			}
+		}
+
 	body {
 		background: #fff;
-		font-family: 'Source Sans Pro', sans-serif;
+		font-family: 'Source Sans 3', sans-serif;
 		font-size: 19pt;
 		font-weight: 300;
 		line-height: 1.75em;
@@ -125,7 +129,7 @@
 	}
 
 	input, textarea, select {
-		font-family: 'Source Sans Pro', sans-serif;
+		font-family: 'Source Sans 3', sans-serif;
 		font-size: 19pt;
 		font-weight: 300;
 		line-height: 1.75em;
@@ -196,6 +200,15 @@
 			color: #E27689;
 			border-bottom-color: rgba(255, 255, 255, 0);
 		}
+	}
+
+	a:focus-visible,
+	button:focus-visible,
+	.button:focus-visible,
+	#nav a:focus-visible,
+	#headerToggle .toggle:focus-visible {
+		outline: 3px solid #8ebebc;
+		outline-offset: 3px;
 	}
 
 	sub {
@@ -308,6 +321,8 @@
 		img {
 			display: block;
 			width: 100%;
+			height: auto;
+			max-width: 100%;
 		}
 
 		&.avatar48 {
@@ -519,21 +534,89 @@
 		}
 	}
 
+	.text-left {
+		text-align: left;
+	}
+
+	p.text-left {
+		margin-bottom: 1.5em;
+	}
+
+	p.text-left:last-child {
+		margin-bottom: 0;
+	}
+
+	.section-heading {
+		margin-bottom: 1em;
+	}
+
+	.media-row {
+		margin-bottom: 2.5em;
+	}
+
+	.media-row:last-child {
+		margin-bottom: 0;
+	}
+
+	.intro-banner {
+		background-color: rgba(169, 169, 169, 0.4);
+		color: #111;
+		font-weight: 600;
+		padding: 0.35em 0.5em;
+	}
+
+	#main > section.dark .intro-banner {
+		color: #111;
+	}
+
+	.intro-banner a,
+	#main > section.dark .intro-banner a {
+		color: inherit;
+		font-weight: 600;
+		border-bottom-color: rgba(17, 17, 17, 0.35);
+	}
+
+	.intro-banner a:hover,
+	#main > section.dark .intro-banner a:hover {
+		color: #111;
+		border-bottom-color: rgba(17, 17, 17, 0);
+	}
+
+	.news-list {
+		padding-left: 1.25em;
+	}
+
+	.news-list li {
+		margin-bottom: 1em;
+	}
+
+	.news-list li:last-child {
+		margin-bottom: 0;
+	}
+
 /* Item */
 
 	.item {
 		box-shadow: 0 0.05em 0.15em 0 rgba(0, 0, 0, 0.05);
 		margin-bottom: 40px;
 
-		header {
+		header,
+		figcaption {
 			background: #fff;
 			margin: 0;
-			padding: 1em 0 1em 0;
+			padding: 1em 1.25em 1em 1.25em;
 			font-size: 0.8em;
+			line-height: 1.6em;
+		}
 
+		header {
 			h3 {
 				font-size: 1em;
 			}
+		}
+
+		figcaption {
+			text-align: left;
 		}
 	}
 
@@ -1013,8 +1096,11 @@
 					top: 0;
 					width: 100%;
 					height: 100%;
+					background: transparent;
 					outline: 0;
 					border: 0;
+					padding: 0;
+					cursor: pointer;
 
 					&:before {
 						text-decoration: none;

@@ -1,123 +1,140 @@
-/*
-	Prologue by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
+(() => {
+	const body = document.body;
+	const header = document.getElementById('header');
+	const nav = document.getElementById('nav');
 
-(function($) {
+	if (!body || !header || !nav) {
+		return;
+	}
 
-	var	$window = $(window),
-		$body = $('body'),
-		$nav = $('#nav');
+	const navLinks = Array.from(nav.querySelectorAll('a[href^="#"]'));
+	const sections = navLinks
+		.map((link) => document.querySelector(link.getAttribute('href')))
+		.filter((section) => section instanceof HTMLElement);
+	const mobileViewport = window.matchMedia('(max-width: 960px)');
 
-	// Breakpoints.
-		breakpoints({
-			wide:      [ '961px',  '1880px' ],
-			normal:    [ '961px',  '1620px' ],
-			narrow:    [ '961px',  '1320px' ],
-			narrower:  [ '737px',  '960px'  ],
-			mobile:    [ null,     '736px'  ]
+	const clearPreload = () => {
+		window.setTimeout(() => {
+			body.classList.remove('is-preload');
+		}, 100);
+	};
+
+	if (document.readyState === 'complete') {
+		clearPreload();
+	} else {
+		window.addEventListener('load', clearPreload, { once: true });
+	}
+
+	const headerToggle = document.createElement('div');
+	headerToggle.id = 'headerToggle';
+	headerToggle.innerHTML =
+		'<button type="button" class="toggle" aria-controls="header" aria-expanded="false" aria-label="Open navigation"></button>';
+	body.append(headerToggle);
+
+	const toggleButton = headerToggle.querySelector('.toggle');
+
+	const setHeaderVisibility = (isVisible) => {
+		body.classList.toggle('header-visible', isVisible);
+
+		if (toggleButton) {
+			toggleButton.setAttribute('aria-expanded', String(isVisible));
+			toggleButton.setAttribute('aria-label', isVisible ? 'Close navigation' : 'Open navigation');
+		}
+	};
+
+	if (toggleButton) {
+		toggleButton.addEventListener('click', (event) => {
+			event.preventDefault();
+			event.stopPropagation();
+			setHeaderVisibility(!body.classList.contains('header-visible'));
+		});
+	}
+
+	header.addEventListener('click', (event) => {
+		const link = event.target.closest('a[href]');
+
+		if (link && mobileViewport.matches) {
+			setHeaderVisibility(false);
+		}
+	});
+
+	document.addEventListener('click', (event) => {
+		if (!body.classList.contains('header-visible')) {
+			return;
+		}
+
+		if (header.contains(event.target) || headerToggle.contains(event.target)) {
+			return;
+		}
+
+		setHeaderVisibility(false);
+	});
+
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape') {
+			setHeaderVisibility(false);
+		}
+	});
+
+	const handleViewportChange = (event) => {
+		if (!event.matches) {
+			setHeaderVisibility(false);
+		}
+	};
+
+	if (typeof mobileViewport.addEventListener === 'function') {
+		mobileViewport.addEventListener('change', handleViewportChange);
+	} else if (typeof mobileViewport.addListener === 'function') {
+		mobileViewport.addListener(handleViewportChange);
+	}
+
+	if (sections.length === 0) {
+		return;
+	}
+
+	const activateLink = (id) => {
+		navLinks.forEach((link) => {
+			const isActive = link.getAttribute('href') === id;
+
+			link.classList.toggle('active', isActive);
+
+			if (isActive) {
+				link.setAttribute('aria-current', 'page');
+			} else {
+				link.removeAttribute('aria-current');
+			}
+		});
+	};
+
+	const updateActiveLink = () => {
+		const scrollMarker = window.scrollY + window.innerHeight * 0.35;
+		let currentSection = sections[0];
+
+		sections.forEach((section) => {
+			if (section.offsetTop <= scrollMarker) {
+				currentSection = section;
+			}
 		});
 
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
+		activateLink(`#${currentSection.id}`);
+	};
+
+	let ticking = false;
+
+	const requestActiveLinkUpdate = () => {
+		if (ticking) {
+			return;
+		}
+
+		ticking = true;
+		window.requestAnimationFrame(() => {
+			updateActiveLink();
+			ticking = false;
 		});
+	};
 
-	// Nav.
-		var $nav_a = $nav.find('a');
-
-		$nav_a
-			.addClass('scrolly')
-			.on('click', function(e) {
-
-				var $this = $(this);
-
-				// External link? Bail.
-					if ($this.attr('href').charAt(0) != '#')
-						return;
-
-				// Prevent default.
-					e.preventDefault();
-
-				// Deactivate all links.
-					$nav_a.removeClass('active');
-
-				// Activate link *and* lock it (so Scrollex doesn't try to activate other links as we're scrolling to this one's section).
-					$this
-						.addClass('active')
-						.addClass('active-locked');
-
-			})
-			.each(function() {
-
-				var	$this = $(this),
-					id = $this.attr('href'),
-					$section = $(id);
-
-				// No section for this link? Bail.
-					if ($section.length < 1)
-						return;
-
-				// Scrollex.
-					$section.scrollex({
-						mode: 'middle',
-						top: '-10vh',
-						bottom: '-10vh',
-						initialize: function() {
-
-							// Deactivate section.
-								$section.addClass('inactive');
-
-						},
-						enter: function() {
-
-							// Activate section.
-								$section.removeClass('inactive');
-
-							// No locked links? Deactivate all links and activate this section's one.
-								if ($nav_a.filter('.active-locked').length == 0) {
-
-									$nav_a.removeClass('active');
-									$this.addClass('active');
-
-								}
-
-							// Otherwise, if this section's link is the one that's locked, unlock it.
-								else if ($this.hasClass('active-locked'))
-									$this.removeClass('active-locked');
-
-						}
-					});
-
-			});
-
-	// Scrolly.
-		$('.scrolly').scrolly();
-
-	// Header (narrower + mobile).
-
-		// Toggle.
-			$(
-				'<div id="headerToggle">' +
-					'<a href="#header" class="toggle"></a>' +
-				'</div>'
-			)
-				.appendTo($body);
-
-		// Header.
-			$('#header')
-				.panel({
-					delay: 500,
-					hideOnClick: true,
-					hideOnSwipe: true,
-					resetScroll: true,
-					resetForms: true,
-					side: 'left',
-					target: $body,
-					visibleClass: 'header-visible'
-				});
-
-})(jQuery);
+	requestActiveLinkUpdate();
+	window.addEventListener('scroll', requestActiveLinkUpdate, { passive: true });
+	window.addEventListener('resize', requestActiveLinkUpdate);
+	window.addEventListener('hashchange', requestActiveLinkUpdate);
+})();
