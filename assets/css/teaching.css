@@ -1,0 +1,21 @@
+#teaching p.text-left {
+	margin-bottom: 0.8em;
+}
+
+#teaching .section-heading {
+	margin-bottom: 0.7em;
+}
+
+#teaching ul.text-left {
+	margin-bottom: 0.95em;
+	padding-left: 1.15em;
+}
+
+	#teaching ul.text-left li {
+		margin-bottom: 0.35em;
+		padding-left: 0.4em;
+	}
+
+	#teaching ul.text-left li:last-child {
+		margin-bottom: 0;
+	}

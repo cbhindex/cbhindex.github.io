@@ -1,0 +1,460 @@
+// Reset.
+// Based on meyerweb.com/eric/tools/css/reset (v2.0 | 20110126 | License: public domain)
+
+	html, body, div, span, applet, object,
+	iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
+	pre, a, abbr, acronym, address, big, cite,
+	code, del, dfn, em, img, ins, kbd, q, s, samp,
+	small, strike, strong, sub, sup, tt, var, b,
+	u, i, center, dl, dt, dd, ol, ul, li, fieldset,
+	form, label, legend, table, caption, tbody,
+	tfoot, thead, tr, th, td, article, aside,
+	canvas, details, embed, figure, figcaption,
+	footer, header, hgroup, menu, nav, output, ruby,
+	section, summary, time, mark, audio, video {
+		margin: 0;
+		padding: 0;
+		border: 0;
+		font-size: 100%;
+		font: inherit;
+		vertical-align: baseline;
+	}
+
+	article, aside, details, figcaption, figure,
+	footer, header, hgroup, menu, nav, section {
+		display: block;
+	}
+
+	body {
+		line-height: 1;
+	}
+
+	ol, ul {
+		list-style:none;
+	}
+
+	blockquote,	q {
+		quotes: none;
+
+		&:before,
+		&:after {
+			content: '';
+			content: none;
+		}
+	}
+
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+
+	body {
+		-webkit-text-size-adjust: none;
+	}
+
+	mark {
+		background-color: transparent;
+		color: inherit;
+	}
+
+	input::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
+
+	input, select, textarea {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+	}
+
+/* Basic */
+
+	// Set box model to border-box.
+	// Based on css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
+		html {
+			box-sizing: border-box;
+			scroll-behavior: smooth;
+		}
+
+		*, *:before, *:after {
+			box-sizing: inherit;
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			html {
+				scroll-behavior: auto;
+			}
+		}
+
+	body {
+		background: linear-gradient(180deg, #e9f0ef 0%, #e2e9e8 100%);
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 19pt;
+		font-weight: 300;
+		line-height: 1.75em;
+		color: #6b7877;
+
+		// Stops initial animations until page loads.
+			&.is-preload {
+				*, *:before, *:after {
+					@include vendor('animation', 'none !important');
+					@include vendor('transition', 'none !important');
+				}
+			}
+
+	}
+
+	input, textarea, select {
+		font-family: 'Source Sans 3', sans-serif;
+		font-size: 19pt;
+		font-weight: 300;
+		line-height: 1.75em;
+		color: #6b7877;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-weight: 300;
+		color: #506664;
+		line-height: 1.5em;
+	}
+
+	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+		color: inherit;
+		text-decoration: none;
+
+		strong {
+			color: #3d5452;
+		}
+	}
+
+	h2 {
+		font-size: 2em;
+		letter-spacing: -1px;
+
+		&.alt {
+			color: #6b7877;
+
+			strong {
+				color: #506664;
+			}
+		}
+	}
+
+	h3 {
+		font-size: 1.5em;
+	}
+
+	header {
+		margin: 0 0 2em 0;
+
+		> p {
+			margin: 1em 0 0 0;
+		}
+	}
+
+	footer {
+		margin: 2em 0 0 0;
+	}
+
+	strong, b {
+		font-weight: 300;
+		color: #506664;
+	}
+
+	em, i {
+		font-style: italic;
+	}
+
+	a {
+		text-decoration: none;
+		color: inherit;
+		border-bottom: dotted 1px rgba(128, 128, 128, 0.5);
+		@include vendor('transition', ('color 0.35s ease-in-out', 'border-bottom-color 0.35s ease-in-out'));
+		outline: 0;
+
+		&:hover {
+			color: #5c7c79;
+			border-bottom-color: rgba(255, 255, 255, 0);
+		}
+	}
+
+	a:focus-visible,
+	button:focus-visible,
+	.button:focus-visible,
+	#nav a:focus-visible,
+	#headerToggle .toggle:focus-visible {
+		outline: 3px solid #8ebebc;
+		outline-offset: 3px;
+	}
+
+	sub {
+		position: relative;
+		top: 0.5em;
+		font-size: 0.8em;
+	}
+
+	sup {
+		position: relative;
+		top: -0.5em;
+		font-size: 0.8em;
+	}
+
+	hr {
+		border: 0;
+		border-top: solid 1px #ddd;
+	}
+
+	blockquote {
+		border-left: solid 0.5em #ddd;
+		padding: 1em 0 1em 2em;
+		font-style: italic;
+	}
+
+	p, ul, ol, dl, table {
+		margin-bottom: 1.6em;
+	}
+
+	br.clear {
+		clear: both;
+	}
+
+/* Container */
+
+	.container {
+		margin: 0 auto;
+		max-width: 100%;
+		width: 1400px;
+
+		@include breakpoint('wide') {
+			width: 1200px;
+		}
+
+		@include breakpoint('normal') {
+			width: 960px;
+		}
+
+		@include breakpoint('narrow') {
+			width: 100%;
+		}
+
+		@include breakpoint('<=narrower') {
+			width: 100%;
+		}
+
+		@include breakpoint('<=mobile') {
+			width: 100%;
+		}
+	}
+
+/* Row */
+
+	.row {
+		@include html-grid((32px, 32px));
+
+		@include breakpoint('wide') {
+			@include html-grid((32px, 32px), 'wide');
+		}
+
+		@include breakpoint('normal') {
+			@include html-grid((32px, 32px), 'normal');
+		}
+
+		@include breakpoint('narrow') {
+			@include html-grid((18px, 18px), 'narrow');
+		}
+
+		@include breakpoint('<=narrower') {
+			@include html-grid((18px, 18px), 'narrower');
+		}
+
+		@include breakpoint('<=mobile') {
+			@include html-grid((16px, 16px), 'mobile');
+		}
+	}
+
+/* Sections/Article */
+
+	section, article {
+		margin-bottom: 2.25em;
+
+		> :last-child,
+		> .container,
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		.row > & {
+			margin-bottom: 0;
+		}
+	}
+
+/* Image */
+
+	.image {
+		display: inline-block;
+		border: 0;
+
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+			max-width: 100%;
+		}
+
+		&.fit {
+			display: block;
+			width: 100%;
+		}
+	}
+
+/* List */
+
+	ul {
+		list-style: disc;
+		padding-left: 1em;
+
+		li {
+			padding-left: 0.5em;
+		}
+	}
+
+	ol {
+		list-style: decimal;
+		padding-left: 1.25em;
+
+		li {
+			padding-left: 0.25em;
+		}
+	}
+
+/* Icons */
+
+	ul.icons {
+		cursor: default;
+		list-style: none;
+		padding-left: 0;
+
+		li {
+			display: inline-block;
+			padding-left: 0;
+		}
+
+		a {
+			display: inline-block;
+			width: 2em;
+			height: 2em;
+			line-height: 2em;
+			text-align: center;
+			border: 0;
+		}
+	}
+
+/* Button */
+
+	input[type="button"],
+	input[type="submit"],
+	input[type="reset"],
+	button,
+	.button {
+		position: relative;
+		display: inline-block;
+		border-radius: 0.65em;
+		color: #fff !important;
+		text-decoration: none;
+		padding: 0.8em 1.55em;
+		background-color: #476260;
+		border: 1px solid #476260;
+		border-bottom-color: #476260;
+		box-shadow: none;
+		cursor: pointer;
+		background-image: none;
+		@include vendor('transition', ('background-color 0.35s ease-in-out', 'border-color 0.35s ease-in-out'));
+
+		&:hover {
+			background-color: #5c7c79;
+			border-color: #5c7c79;
+			border-bottom-color: #5c7c79;
+		}
+
+		&:active {
+			background-color: #3d5351;
+			border-color: #3d5351;
+			border-bottom-color: #3d5351;
+		}
+	}
+
+@include breakpoint('wide') {
+	body, input, textarea, select {
+		font-size: 17pt;
+	}
+}
+
+@include breakpoint('narrow') {
+	body, input, textarea, select {
+		font-size: 16pt;
+	}
+
+	.container {
+		padding: 0 2em 0 2em;
+	}
+
+	ul.icons {
+		li {
+			a {
+				width: 1.75em;
+			}
+		}
+	}
+}
+
+@include breakpoint('<=narrower') {
+	html, body {
+		overflow-x: hidden;
+	}
+
+	body, input, textarea, select {
+		font-size: 16pt;
+	}
+
+	header {
+		br {
+			display: none;
+		}
+	}
+
+	.container {
+		padding: 0 2em 0 2em;
+	}
+
+	ul.icons {
+		a {
+			width: 1.75em;
+			font-size: 1.25em;
+		}
+	}
+}
+
+@include breakpoint('<=mobile') {
+	body, input, textarea, select {
+		font-size: 14pt;
+	}
+
+	h2 {
+		font-size: 1.5em;
+		letter-spacing: 0;
+		font-weight: 300;
+	}
+
+	.container {
+		padding: 0 15px 0 15px;
+	}
+
+	ul.icons {
+		a {
+			width: 2em;
+			font-size: 1.25em;
+		}
+	}
+}

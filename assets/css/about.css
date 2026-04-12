@@ -1,0 +1,246 @@
+.about-profile {
+	background: linear-gradient(180deg, rgba(248, 251, 251, 0.98) 0%, #fff 18%);
+	border: 1px solid rgba(71, 98, 96, 0.16);
+	border-radius: 1em;
+	box-shadow: 0 0.2em 0.9em 0 rgba(34, 38, 41, 0.08);
+	display: grid;
+	gap: 1.3em;
+	grid-template-columns: minmax(11.25em, 13.75em) minmax(0, 1fr);
+	margin: 0 0 1.55em 0;
+	overflow: hidden;
+	padding: 1.3em;
+	position: relative;
+	text-align: left;
+}
+
+.about-profile::before {
+	background: linear-gradient(90deg, #6f9694 0%, #8ebebc 55%, #d8eae9 100%);
+	border-radius: inherit;
+	content: '';
+	height: 0.3em;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.about-profile > * {
+	min-width: 0;
+}
+
+.about-portrait {
+	background: linear-gradient(180deg, #fff 0%, #f8fbfb 100%);
+	border: 1px solid rgba(71, 98, 96, 0.14);
+	border-radius: 0.95em;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+	margin: 0;
+	padding: 0.85em;
+}
+
+.about-portrait .image {
+	background: #edf4f3;
+	border-radius: 0.75em;
+	display: block;
+	overflow: hidden;
+}
+
+.about-portrait img {
+	display: block;
+	height: auto;
+	width: 100%;
+}
+
+.about-portrait figcaption {
+	color: #617170;
+	font-size: 0.76em;
+	font-weight: 600;
+	line-height: 1.55em;
+	margin-top: 0.7em;
+}
+
+.about-profile-copy {
+	-ms-flex-item-align: start;
+	align-self: start;
+	min-width: 0;
+}
+
+.about-kicker {
+	color: #476260;
+	font-size: 0.72em;
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	margin-bottom: 0.6em;
+	text-transform: uppercase;
+}
+
+.about-profile-title {
+	margin-bottom: 0.3em;
+}
+
+.about-profile-title strong {
+	color: #314846;
+}
+
+.about-intro {
+	color: #5d6968;
+	font-size: 1.02em;
+	line-height: 1.7em;
+	margin: 0 0 0.95em 0;
+	max-width: none;
+}
+
+.about-meta-grid {
+	display: grid;
+	gap: 0.7em;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	margin: 0;
+}
+
+.about-meta-block {
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, #f8fbfb 100%);
+	border: 1px solid rgba(71, 98, 96, 0.14);
+	border-radius: 0.85em;
+	box-shadow: 0 0.08em 0.24em 0 rgba(34, 38, 41, 0.04);
+	display: block;
+	padding: 0.8em 0.9em 0.85em;
+	text-align: left;
+	-moz-transition: border-color 0.25s ease, box-shadow 0.25s ease, -moz-transform 0.25s ease;
+	-webkit-transition: border-color 0.25s ease, box-shadow 0.25s ease, -webkit-transform 0.25s ease;
+	-ms-transition: border-color 0.25s ease, box-shadow 0.25s ease, -ms-transform 0.25s ease;
+	transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.about-meta-block-wide {
+	grid-column: 1 / -1;
+}
+
+.about-meta-block:hover {
+	border-color: rgba(71, 98, 96, 0.28);
+	box-shadow: 0 0.18em 0.5em 0 rgba(34, 38, 41, 0.08);
+	-moz-transform: translateY(-0.1em);
+	-webkit-transform: translateY(-0.1em);
+	-ms-transform: translateY(-0.1em);
+	transform: translateY(-0.1em);
+}
+
+.about-meta-block > :last-child {
+	margin-bottom: 0;
+}
+
+.about-meta-label {
+	color: #476260;
+	font-size: 0.7em;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	margin-bottom: 0.4em;
+	text-transform: uppercase;
+}
+
+.about-meta-copy {
+	color: #617170;
+	font-size: 0.88em;
+	line-height: 1.5em;
+	margin-bottom: 0;
+}
+
+.about-role-list {
+	color: #617170;
+	font-size: 0.88em;
+	line-height: 1.5em;
+	margin-bottom: 0;
+	padding-left: 1.3em;
+}
+
+.about-role-list li {
+	margin-bottom: 0.35em;
+	padding-left: 0.45em;
+}
+
+.about-role-list li:last-child {
+	margin-bottom: 0;
+}
+
+.about-narrative {
+	margin: 0 auto;
+	max-width: 60em;
+}
+
+@media screen and (max-width: 960px) {
+	.about-profile {
+		gap: 1.05em;
+		grid-template-columns: 1fr;
+		padding: 1.15em;
+	}
+
+	.about-portrait {
+		justify-self: center;
+		max-width: 18em;
+		width: 100%;
+	}
+
+	.about-profile-copy {
+		-ms-flex-item-align: start;
+		align-self: start;
+	}
+
+	.about-meta-grid {
+		gap: 0.65em;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.about-narrative {
+		max-width: none;
+	}
+}
+
+@media screen and (max-width: 736px) {
+		.about-profile {
+			gap: 0.9em;
+			padding: 1em;
+		}
+
+	.about-portrait {
+		max-width: 16.5em;
+		padding: 0.75em;
+	}
+
+		.about-portrait figcaption {
+			font-size: 0.72em;
+			line-height: 1.5em;
+		}
+
+		.about-kicker {
+			font-size: 0.66em;
+			letter-spacing: 0.12em;
+			margin-bottom: 0.6em;
+		}
+
+		.about-profile-title {
+			margin-bottom: 0.25em;
+		}
+
+		.about-intro {
+			font-size: 0.92em;
+			line-height: 1.6em;
+			margin-bottom: 0.85em;
+		}
+
+	.about-meta-grid {
+		gap: 0.75em;
+		grid-template-columns: 1fr;
+	}
+
+	.about-meta-block {
+		padding: 0.82em 0.88em;
+	}
+
+	.about-meta-copy {
+		font-size: 0.84em;
+		line-height: 1.45em;
+	}
+
+	.about-role-list {
+		font-size: 0.84em;
+		line-height: 1.45em;
+	}
+}
