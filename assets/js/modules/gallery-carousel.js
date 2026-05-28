@@ -81,6 +81,7 @@
 		let lastAutoTick = 0;
 		let resumeTimer = 0;
 		let scrollIdleTimer = 0;
+		let isPointerDown = false;
 		let isDragging = false;
 		let dragPointerId = null;
 		let dragStartX = 0;
@@ -241,14 +242,21 @@
 		};
 
 		const endDrag = () => {
-			if (!isDragging) {
+			if (!isPointerDown) {
 				return;
 			}
 
+			const wasDragging = isDragging;
+
+			isPointerDown = false;
 			isDragging = false;
 			dragPointerId = null;
 			carousel.classList.remove('is-dragging');
-			normalizeLoopPosition();
+
+			if (wasDragging) {
+				normalizeLoopPosition();
+			}
+
 			scheduleAutoplayResume();
 		};
 
@@ -257,40 +265,50 @@
 				return;
 			}
 
-			isDragging = true;
+			isPointerDown = true;
+			isDragging = false;
 			dragPointerId = event.pointerId;
 			dragStartX = event.clientX;
 			dragStartScrollLeft = viewport.scrollLeft;
 			dragDistance = 0;
 			suppressClick = false;
-			carousel.classList.add('is-dragging');
 			pauseAutoplay();
-
-			if (typeof viewport.setPointerCapture === 'function') {
-				viewport.setPointerCapture(event.pointerId);
-			}
-
-			event.preventDefault();
 		});
 
 		viewport.addEventListener('pointermove', (event) => {
-			if (!isDragging || event.pointerId !== dragPointerId) {
+			if (!isPointerDown || event.pointerId !== dragPointerId) {
 				return;
 			}
 
 			const deltaX = event.clientX - dragStartX;
 
 			dragDistance = Math.max(dragDistance, Math.abs(deltaX));
+
+			if (!isDragging) {
+				if (dragDistance <= 6) {
+					return;
+				}
+
+				// Only now does this become a real drag rather than a click, so we
+				// capture the pointer here. Capturing in pointerdown would retarget the
+				// subsequent click to the viewport and stop links inside cards from
+				// navigating on a plain click.
+				isDragging = true;
+				suppressClick = true;
+				carousel.classList.add('is-dragging');
+
+				if (typeof viewport.setPointerCapture === 'function') {
+					viewport.setPointerCapture(event.pointerId);
+				}
+			}
+
 			viewport.scrollLeft = dragStartScrollLeft - deltaX;
 			dragStartScrollLeft += normalizeLoopPosition();
-
-			if (dragDistance > 6) {
-				suppressClick = true;
-			}
+			event.preventDefault();
 		});
 
 		const releasePointer = (event) => {
-			if (!isDragging || event.pointerId !== dragPointerId) {
+			if (!isPointerDown || event.pointerId !== dragPointerId) {
 				return;
 			}
 

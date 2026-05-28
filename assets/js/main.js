@@ -1,6 +1,11 @@
 (() => {
 	const app = window.BHChaiSite || {};
-	const initSequence = [app.initSiteHeader, app.initGalleryCarousels, app.initSectionNav];
+	const initSequence = [
+		app.initSiteHeader,
+		app.initGalleryCarousels,
+		app.initSectionNav,
+		app.initResearchDetails,
+	];
 
 	initSequence.forEach((initFn) => {
 		if (typeof initFn === 'function') {
