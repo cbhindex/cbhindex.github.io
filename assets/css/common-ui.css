@@ -63,3 +63,78 @@ p.text-left {
 		margin-bottom: 15px;
 	}
 }
+
+/* =========================================================================
+   Open-screen entrance + scroll reveal.
+   - First-screen elements (#top, #header, hero) use a pure-CSS keyframe
+     animation that auto-plays the instant they paint — no JS in the path, so
+     no delay on open.
+   - Content sections fade in on scroll via JS toggling .in — a plain CSS
+     transition, which is the most reliable cross-browser way to replay a
+     reveal (re-triggering keyframe animations is flaky in some browsers).
+   Gated behind html.js-anim (no-JS visitors get full, visible content).
+   ========================================================================= */
+
+@keyframes bhFade {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes bhRise {
+	from {
+		opacity: 0;
+		transform: translateY(18px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+/* First-screen entrance — auto-plays on load, zero delay. */
+.js-anim #header,
+.js-anim #top {
+	animation: bhFade 0.6s ease both;
+}
+
+.js-anim .reveal {
+	animation: bhRise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* Content sections — hidden until scrolled into view, then faded + lifted into
+   place by JS toggling .in. The transition lives on .in so leaving resets
+   instantly off-screen and the reveal replays each time you scroll back. */
+.js-anim .reveal-fade {
+	opacity: 0;
+	transform: translateY(32px);
+}
+
+.js-anim .reveal-fade.in {
+	opacity: 1;
+	transform: none;
+	transition: opacity 0.7s ease,
+		transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Safety net: if intro.js never runs, the inline head watchdog adds
+   .reveal-fallback so the sections can't stay hidden. */
+html.reveal-fallback .reveal-fade {
+	opacity: 1 !important;
+	transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.js-anim #header,
+	.js-anim #top,
+	.js-anim .reveal,
+	.js-anim .reveal-fade {
+		animation: none !important;
+		opacity: 1 !important;
+		transform: none !important;
+		transition: none !important;
+	}
+}

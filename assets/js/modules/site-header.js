@@ -2,21 +2,6 @@
 	const app = (window.BHChaiSite = window.BHChaiSite || {});
 	let hasInitialised = false;
 
-	const clearPreloadState = (body) => {
-		window.setTimeout(() => {
-			body.classList.remove('is-preload');
-		}, 100);
-	};
-
-	const initPreload = (body) => {
-		if (document.readyState === 'complete') {
-			clearPreloadState(body);
-			return;
-		}
-
-		window.addEventListener('load', () => clearPreloadState(body), { once: true });
-	};
-
 	const initHeaderToggle = (body, header, nav) => {
 		const mobileViewport = window.matchMedia('(max-width: 960px)');
 		let headerToggle = document.getElementById('headerToggle');
@@ -98,8 +83,6 @@
 		if (!body) {
 			return;
 		}
-
-		initPreload(body);
 
 		const header = document.getElementById('header');
 		const nav = document.getElementById('nav');

@@ -1,6 +1,7 @@
 (() => {
 	const app = window.BHChaiSite || {};
 	const initSequence = [
+		app.initIntro,
 		app.initSiteHeader,
 		app.initGalleryCarousels,
 		app.initSectionNav,

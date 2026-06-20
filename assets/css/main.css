@@ -97,17 +97,6 @@ input, select, textarea {
 		color: #6b7877;
 	}
 
-		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
-			-moz-animation: none !important;
-			-webkit-animation: none !important;
-			-ms-animation: none !important;
-			animation: none !important;
-			-moz-transition: none !important;
-			-webkit-transition: none !important;
-			-ms-transition: none !important;
-			transition: none !important;
-		}
-
 	input, textarea, select {
 		font-family: 'Source Sans 3', sans-serif;
 		font-size: 19pt;

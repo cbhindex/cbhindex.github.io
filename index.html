@@ -6,6 +6,31 @@
 -->
 <html lang="en">
 	<head>
+		<script>
+			/* Enables the CSS entrance animations only when JS is available; set
+			   synchronously here so the animation is armed before first paint.
+			   (Without JS, content simply shows at full opacity.) */
+			document.documentElement.classList.add('js-anim');
+			/* Keep the browser's scroll restoration on reload instant: the global
+			   scroll-behavior:smooth otherwise animates it, so the page appears to
+			   scroll/bounce into position. Smooth scrolling is restored after load
+			   for in-page navigation. */
+			document.documentElement.style.scrollBehavior = 'auto';
+			window.addEventListener('load', function () {
+				window.requestAnimationFrame(function () {
+					window.requestAnimationFrame(function () {
+						document.documentElement.style.scrollBehavior = '';
+					});
+				});
+				/* Safety net: if the reveal script never runs, make sure the
+				   sections (hidden by default) can't stay hidden. */
+				window.setTimeout(function () {
+					if (!(window.BHChaiSite && window.BHChaiSite.introReady)) {
+						document.documentElement.classList.add('reveal-fallback');
+					}
+				}, 3000);
+			});
+		</script>
 		<title>Dr Binghao Chai | Computational Pathology and Medical Imaging Analysis</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,9 +54,9 @@
 			rel="stylesheet"
 			href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600&display=swap"
 		/>
-		<link rel="stylesheet" href="assets/css/main.css?v=20260529-2" />
+		<link rel="stylesheet" href="assets/css/main.css?v=20260620-1" />
 		<link rel="stylesheet" href="assets/css/layout.css?v=20260529-2" />
-		<link rel="stylesheet" href="assets/css/common-ui.css?v=20260529-2" />
+		<link rel="stylesheet" href="assets/css/common-ui.css?v=20260620-16" />
 		<link rel="stylesheet" href="assets/css/about.css?v=20260529-2" />
 		<link rel="stylesheet" href="assets/css/news.css?v=20260529-2" />
 		<link rel="stylesheet" href="assets/css/teaching.css?v=20260529-2" />
@@ -102,7 +127,7 @@
 			}
 		</script>
 	</head>
-	<body class="is-preload">
+	<body>
 
 			<div id="header">
 
@@ -144,17 +169,17 @@
 						<div class="container">
 
 							<header>
-								<h2 class="alt intro-banner">Hi! I'm Binghao, a Research Fellow in AI &amp; Precision Oncology at <a target="_blank" rel="noopener noreferrer" href="https://www.icr.ac.uk/">the Institute of Cancer Research (ICR)</a>.</h2>
+								<h2 class="alt intro-banner reveal">Hi! I'm Binghao, a Research Fellow in AI &amp; Precision Oncology at <a target="_blank" rel="noopener noreferrer" href="https://www.icr.ac.uk/">the Institute of Cancer Research (ICR)</a>.</h2>
 							</header>
 
 							<footer>
-								<a href="#about" class="button">See more</a>
+								<a href="#about" class="button reveal reveal-d1">See more</a>
 							</footer>
 
 						</div>
 					</section>
 
-					<section id="about" class="three">
+					<section id="about" class="three reveal-fade">
 						<div class="container">
 
 								<header>
@@ -205,7 +230,7 @@
 							</div>
 						</section>
 
-					<section id="research" class="two">
+					<section id="research" class="two reveal-fade">
 						<div class="container">
 
 							<header>
@@ -418,7 +443,7 @@
 						</div>
 					</section>
 				
-					<section id="teaching" class="two">
+					<section id="teaching" class="two reveal-fade">
 						<div class="container">
 
 							<header>
@@ -446,7 +471,7 @@
 						</div>
 					</section>
 
-					<section id="miscellaneous" class="two">
+					<section id="miscellaneous" class="two reveal-fade">
 						<div class="container">
 
 							<header>
@@ -626,11 +651,12 @@
 
 			</div>
 
-			<script src="assets/js/modules/site-header.js?v=20260529-2" defer></script>
+			<script src="assets/js/modules/site-header.js?v=20260620-1" defer></script>
 			<script src="assets/js/modules/gallery-carousel.js?v=20260529-2" defer></script>
 			<script src="assets/js/modules/section-nav.js?v=20260529-2" defer></script>
 			<script src="assets/js/modules/research-details.js?v=20260529-2" defer></script>
-			<script src="assets/js/main.js?v=20260529-2" defer></script>
+			<script src="assets/js/modules/intro.js?v=20260620-15" defer></script>
+			<script src="assets/js/main.js?v=20260620-1" defer></script>
 
 	</body>
 </html>
