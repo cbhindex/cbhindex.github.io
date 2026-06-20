@@ -95,14 +95,25 @@ p.text-left {
 	}
 }
 
-/* First-screen entrance — auto-plays on load, zero delay. */
+/* First-screen entrance. Armed paused so the timeline can't advance during the
+   blank/paint-holding window of a cold first load (otherwise the fade finishes
+   before the page is actually visible and you only ever see it on a warm
+   reload). JS adds html.is-ready once the page has painted, which starts it. */
 .js-anim #header,
 .js-anim #top {
 	animation: bhFade 0.6s ease both;
+	animation-play-state: paused;
 }
 
 .js-anim .reveal {
 	animation: bhRise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+	animation-play-state: paused;
+}
+
+.js-anim.is-ready #header,
+.js-anim.is-ready #top,
+.js-anim.is-ready .reveal {
+	animation-play-state: running;
 }
 
 /* Content sections — hidden until scrolled into view, then faded + lifted into

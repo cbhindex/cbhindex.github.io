@@ -11,6 +11,29 @@
 			   synchronously here so the animation is armed before first paint.
 			   (Without JS, content simply shows at full opacity.) */
 			document.documentElement.classList.add('js-anim');
+			/* Start the first-screen entrance only once the page has actually
+			   painted. The keyframes are armed paused (see common-ui.css); if they
+			   auto-ran, their timeline would advance during the cold-load blank
+			   window and the fade would be over before anything is visible — which
+			   is why it only showed on a warm reload. The double rAF lets the
+			   paused start frame paint first; the timeout is a failsafe so the
+			   (opacity:0) content can never stay hidden. */
+			function bhStartEntrance() {
+				document.documentElement.classList.add('is-ready');
+			}
+			function bhArmEntrance() {
+				window.requestAnimationFrame(function () {
+					window.requestAnimationFrame(bhStartEntrance);
+				});
+			}
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', bhArmEntrance, {
+					once: true,
+				});
+			} else {
+				bhArmEntrance();
+			}
+			window.setTimeout(bhStartEntrance, 2000);
 			/* Keep the browser's scroll restoration on reload instant: the global
 			   scroll-behavior:smooth otherwise animates it, so the page appears to
 			   scroll/bounce into position. Smooth scrolling is restored after load
@@ -56,7 +79,7 @@
 		/>
 		<link rel="stylesheet" href="assets/css/main.css?v=20260620-1" />
 		<link rel="stylesheet" href="assets/css/layout.css?v=20260529-2" />
-		<link rel="stylesheet" href="assets/css/common-ui.css?v=20260620-16" />
+		<link rel="stylesheet" href="assets/css/common-ui.css?v=20260620-17" />
 		<link rel="stylesheet" href="assets/css/about.css?v=20260529-2" />
 		<link rel="stylesheet" href="assets/css/news.css?v=20260529-2" />
 		<link rel="stylesheet" href="assets/css/teaching.css?v=20260529-2" />
@@ -604,7 +627,7 @@
 									<summary><span>2026</span></summary>
 									<div class="news-year-content">
 										<ul class="text-left news-list">
-											<li>Jun. 2026, I chaired Session Two (GenAI in Biology and Health) at the Predictive Cell Symposium, ICR.</li>
+											<li>Jun. 2026, I chaired Session Two (<i>GenAI in Biology and Health</i>) at the Predictive Cell Symposium, ICR.</li>
 											<li>May. 2026, I presented <i>Pheno-MYCN: interpretable H&E-derived phenotypes associated with MYCN amplification in paediatric neuroblastoma</i> (poster) at the ICR Division of Cell and Molecular Biology away day.</li>
 											<li>Apr. 2026, I joined <a href="https://www.icr.ac.uk/research-and-discoveries/find-a-researcher/test-researcher-profile-detail/professor-chris-bakal" target="_blank" rel="noopener noreferrer">Bakal Lab</a> at the Institute of Cancer Research (ICR) as a research fellow in AI &amp; precision oncology.</li>
 										</ul>
@@ -631,7 +654,7 @@
 											<li>Mar. 2023, I passed my final viva and was awarded a PhD degree.</li>
 											<li>Feb. 2023, I joined <a href="http://www.draviamlab.uk/" target="_blank" rel="noopener noreferrer">Draviam Lab</a> at Queen Mary University of London as a postdoctoral computer vision scientist.</li>
 											<li>Jul. 2019, I passed my upgrade viva and became a PhD candidate.</li>
-											<li>Apr. 2019, I presented <a href="https://www.youtube.com/watch?v=PU52JhSnYPM" target="_blank" rel="noopener noreferrer">"An emerging role for machine learning in the classification of tumours of fat: distinguishing benign from malignant"</a> at the 15th European Congress on Digital Pathology (ECDP 2019).</li>
+											<li>Apr. 2019, I presented <a href="https://pathsocjournals.onlinelibrary.wiley.com/toc/10969896/2019/249/S1" target="_blank" rel="noopener noreferrer">"An emerging role for machine learning in the classification of tumours of fat: distinguishing benign from malignant"</a> at the 15th European Congress on Digital Pathology (ECDP 2019).</li>
 											<li>Jan. 2018, I joined <a href="https://www.gla.ac.uk/schools/computing/staff/kevinbryson/" target="_blank" rel="noopener noreferrer">Bryson Lab</a> in collaboration with <a href="https://www.sarcoma-research.com/" target="_blank" rel="noopener noreferrer">Pillay Lab</a> at UCL as a PhD student.</li>
 										</ul>
 									</div>
