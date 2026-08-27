@@ -1,0 +1,11 @@
+# bhchai.com - everything published here is meant to be found, indexed and
+# cited, by search engines and AI agents alike. No crawler is excluded and no
+# crawl-delay is set.
+#
+# robots.txt applies per host, so this file also governs the project pages
+# served from this domain at bhchai.com/<project>/.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://bhchai.com/sitemap.xml

@@ -2,8 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
       <loc>https://bhchai.com/</loc>
-      <lastmod>2026-05-29</lastmod>
+      <lastmod>2026-08-27</lastmod>
       <changefreq>monthly</changefreq>
       <priority>1.0</priority>
+   </url>
+   <url>
+      <loc>https://bhchai.com/visualise_scan_stain_efffects/</loc>
+      <lastmod>2026-08-27</lastmod>
+      <changefreq>yearly</changefreq>
+      <priority>0.6</priority>
    </url>
 </urlset>
