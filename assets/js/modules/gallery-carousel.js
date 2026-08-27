@@ -89,6 +89,10 @@
 		let dragDistance = 0;
 		let suppressClick = false;
 
+		// The rest of the site's motion is gated on this (common-ui.css); the
+		// carousel was the one animation that ignored it.
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
 		const getAutoSpeed = () => (window.innerWidth <= 736 ? 34 : 46);
 		const getScrollStep = () => Math.max(viewport.clientWidth * 0.72, 240);
 		const hasValidLoop = () => Number.isFinite(loopStart) && Number.isFinite(loopWidth) && loopWidth > 1;
@@ -155,7 +159,17 @@
 				return;
 			}
 
-			loopWidth = totalTrackWidth / 3;
+			// The track holds three copies of the card list, so it spans three loop
+			// periods MINUS one flex gap (3N cards have 3N-1 gaps, not 3N).
+			// scrollWidth / 3 is therefore short by gap/3 and the loop visibly jumps
+			// at every wrap; measuring the real period off the DOM is exact.
+			const firstOriginalCard = track.children[originalCards.length];
+			const measuredLoopWidth =
+				firstOriginalCard && track.children[0]
+					? firstOriginalCard.offsetLeft - track.children[0].offsetLeft
+					: 0;
+
+			loopWidth = measuredLoopWidth > 0 ? measuredLoopWidth : totalTrackWidth / 3;
 			loopStart = loopWidth;
 
 			if (!hasValidLoop()) {
@@ -203,7 +217,7 @@
 		};
 
 		const startAutoplay = () => {
-			if (autoRunning || !hasMeasured || !hasValidLoop()) {
+			if (autoRunning || !hasMeasured || !hasValidLoop() || reduceMotion.matches) {
 				return;
 			}
 
@@ -237,7 +251,10 @@
 
 		const moveByStep = (direction) => {
 			pauseAutoplay();
-			viewport.scrollBy({ left: direction * getScrollStep(), behavior: 'smooth' });
+			viewport.scrollBy({
+				left: direction * getScrollStep(),
+				behavior: reduceMotion.matches ? 'auto' : 'smooth',
+			});
 			scheduleResumeAfterScrollIdle();
 		};
 
@@ -362,6 +379,16 @@
 			{ passive: true }
 		);
 
+		// pointerdown bails out for touch, and a tap that never becomes a scroll
+		// fires no 'scroll' event either — so without these the touchstart pause
+		// above stops the carousel until the page is reloaded.
+		const resumeAfterTouch = () => {
+			scheduleResumeAfterScrollIdle();
+		};
+
+		viewport.addEventListener('touchend', resumeAfterTouch, { passive: true });
+		viewport.addEventListener('touchcancel', resumeAfterTouch, { passive: true });
+
 		viewport.addEventListener(
 			'scroll',
 			() => {
@@ -405,7 +432,22 @@
 			}
 		});
 
-		window.addEventListener('resize', measure);
+		// measure() reads scrollWidth and every card's box, forcing a synchronous
+		// layout. iOS Safari fires resize on every URL-bar transition, so coalesce
+		// into one frame — the same pattern section-nav.js already uses.
+		let resizeTicking = false;
+
+		window.addEventListener('resize', () => {
+			if (resizeTicking) {
+				return;
+			}
+
+			resizeTicking = true;
+			window.requestAnimationFrame(() => {
+				measure();
+				resizeTicking = false;
+			});
+		});
 		window.addEventListener(
 			'load',
 			() => {
@@ -418,6 +460,20 @@
 			document.fonts.ready.then(() => {
 				measure();
 			});
+		}
+
+		const handleMotionPreferenceChange = () => {
+			if (reduceMotion.matches) {
+				pauseAutoplay();
+			} else {
+				startAutoplay();
+			}
+		};
+
+		if (typeof reduceMotion.addEventListener === 'function') {
+			reduceMotion.addEventListener('change', handleMotionPreferenceChange);
+		} else if (typeof reduceMotion.addListener === 'function') {
+			reduceMotion.addListener(handleMotionPreferenceChange);
 		}
 
 		measure();

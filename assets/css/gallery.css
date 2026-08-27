@@ -26,7 +26,7 @@
 	}
 
 	.gallery-viewport:focus-visible {
-		outline: 3px solid #8ebebc;
+		outline: 3px solid var(--bh-accent);
 		outline-offset: 3px;
 	}
 
@@ -67,6 +67,10 @@
 		display: block;
 		height: auto;
 		max-height: var(--gallery-media-height);
+		/* width is definite (100%), so max-height re-runs the height calculation and
+		   throws the intrinsic ratio away, stretching portraits. That only shows when
+		   the carousel script has not set --gallery-card-aspect. */
+		object-fit: cover;
 		-webkit-user-drag: none;
 		user-select: none;
 		width: 100%;
@@ -82,7 +86,7 @@
 		border: 0;
 		border-radius: 0;
 		box-shadow: none;
-		color: #476260 !important;
+		color: var(--bh-ink) !important;
 		display: inline-flex;
 		height: 3rem;
 		justify-content: center;
@@ -101,18 +105,18 @@
 
 	.gallery-nav:hover {
 		background: rgba(111, 138, 135, 0.18);
-		color: #314846 !important;
+		color: var(--bh-ink-strong) !important;
 		width: 2.45rem;
 	}
 
 	.gallery-nav:active {
 		background: rgba(111, 138, 135, 0.24);
-		color: #314846 !important;
+		color: var(--bh-ink-strong) !important;
 		width: 2.45rem;
 	}
 
 	.gallery-nav:focus-visible {
-		outline: 3px solid #8ebebc;
+		outline: 3px solid var(--bh-accent);
 		outline-offset: 3px;
 	}
 

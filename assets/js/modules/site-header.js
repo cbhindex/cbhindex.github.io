@@ -11,7 +11,9 @@
 			headerToggle.id = 'headerToggle';
 			headerToggle.innerHTML =
 				'<button type="button" class="toggle" aria-controls="header" aria-expanded="false" aria-label="Open navigation"></button>';
-			body.append(headerToggle);
+			// First in the DOM, so the hamburger is the first tab stop rather than
+			// the very last element on the page.
+			body.prepend(headerToggle);
 		}
 
 		const toggleButton = headerToggle.querySelector('.toggle');
@@ -21,6 +23,12 @@
 		}
 
 		const setHeaderVisibility = (isVisible) => {
+			// The header becomes visibility:hidden when closed (layout.css), so focus
+			// must not be left inside it — hand it back to the button that closed it.
+			if (!isVisible && header.contains(document.activeElement)) {
+				toggleButton.focus();
+			}
+
 			body.classList.toggle('header-visible', isVisible);
 			toggleButton.setAttribute('aria-expanded', String(isVisible));
 			toggleButton.setAttribute('aria-label', isVisible ? 'Close navigation' : 'Open navigation');

@@ -1,8 +1,8 @@
 .about-profile {
 	background: linear-gradient(180deg, rgba(248, 251, 251, 0.98) 0%, #fff 18%);
-	border: 1px solid rgba(71, 98, 96, 0.16);
+	border: 1px solid rgba(var(--bh-rule-rgb), 0.16);
 	border-radius: 1em;
-	box-shadow: 0 0.2em 0.9em 0 rgba(34, 38, 41, 0.08);
+	box-shadow: 0 0.2em 0.9em 0 rgba(var(--bh-shadow-rgb), 0.08);
 	display: grid;
 	gap: 1.3em;
 	grid-template-columns: minmax(11.25em, 13.75em) minmax(0, 1fr);
@@ -14,7 +14,7 @@
 }
 
 .about-profile::before {
-	background: linear-gradient(90deg, #6f9694 0%, #8ebebc 55%, #d8eae9 100%);
+	background: linear-gradient(90deg, #6f9694 0%, var(--bh-accent) 55%, #d8eae9 100%);
 	border-radius: inherit;
 	content: '';
 	height: 0.3em;
@@ -29,8 +29,8 @@
 }
 
 .about-portrait {
-	background: linear-gradient(180deg, #fff 0%, #f8fbfb 100%);
-	border: 1px solid rgba(71, 98, 96, 0.14);
+	background: linear-gradient(180deg, #fff 0%, var(--bh-surface) 100%);
+	border: 1px solid rgba(var(--bh-rule-rgb), 0.14);
 	border-radius: 0.95em;
 	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
 	margin: 0;
@@ -51,7 +51,7 @@
 }
 
 .about-portrait figcaption {
-	color: #617170;
+	color: var(--bh-ink-muted);
 	font-size: 0.76em;
 	font-weight: 600;
 	line-height: 1.55em;
@@ -65,7 +65,7 @@
 }
 
 .about-kicker {
-	color: #476260;
+	color: var(--bh-ink);
 	font-size: 0.72em;
 	font-weight: 700;
 	letter-spacing: 0.14em;
@@ -78,7 +78,7 @@
 }
 
 .about-profile-title strong {
-	color: #314846;
+	color: var(--bh-ink-strong);
 }
 
 .about-intro {
@@ -97,10 +97,10 @@
 }
 
 .about-meta-block {
-	background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, #f8fbfb 100%);
-	border: 1px solid rgba(71, 98, 96, 0.14);
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, var(--bh-surface) 100%);
+	border: 1px solid rgba(var(--bh-rule-rgb), 0.14);
 	border-radius: 0.85em;
-	box-shadow: 0 0.08em 0.24em 0 rgba(34, 38, 41, 0.04);
+	box-shadow: 0 0.08em 0.24em 0 rgba(var(--bh-shadow-rgb), 0.04);
 	display: block;
 	padding: 0.8em 0.9em 0.85em;
 	text-align: left;
@@ -115,8 +115,8 @@
 }
 
 .about-meta-block:hover {
-	border-color: rgba(71, 98, 96, 0.28);
-	box-shadow: 0 0.18em 0.5em 0 rgba(34, 38, 41, 0.08);
+	border-color: rgba(var(--bh-rule-rgb), 0.28);
+	box-shadow: 0 0.18em 0.5em 0 rgba(var(--bh-shadow-rgb), 0.08);
 	-moz-transform: translateY(-0.1em);
 	-webkit-transform: translateY(-0.1em);
 	-ms-transform: translateY(-0.1em);
@@ -128,7 +128,7 @@
 }
 
 .about-meta-label {
-	color: #476260;
+	color: var(--bh-ink);
 	font-size: 0.7em;
 	font-weight: 700;
 	letter-spacing: 0.1em;
@@ -137,14 +137,14 @@
 }
 
 .about-meta-copy {
-	color: #617170;
+	color: var(--bh-ink-muted);
 	font-size: 0.88em;
 	line-height: 1.5em;
 	margin-bottom: 0;
 }
 
 .about-role-list {
-	color: #617170;
+	color: var(--bh-ink-muted);
 	font-size: 0.88em;
 	line-height: 1.5em;
 	margin-bottom: 0;
@@ -158,11 +158,6 @@
 
 .about-role-list li:last-child {
 	margin-bottom: 0;
-}
-
-.about-narrative {
-	margin: 0 auto;
-	max-width: 60em;
 }
 
 @media screen and (max-width: 960px) {
@@ -186,10 +181,6 @@
 	.about-meta-grid {
 		gap: 0.65em;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
-	.about-narrative {
-		max-width: none;
 	}
 }
 

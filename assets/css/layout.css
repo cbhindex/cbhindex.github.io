@@ -36,6 +36,9 @@
 /* Header */
 
 	#header {
+		/* Same story as #footer: main.css's `header { margin: 0 0 2em 0 }` now
+		   applies. Harmless while the sidebar is position:fixed, but wrong. */
+		margin-bottom: 0;
 		display: -moz-flex;
 		display: -webkit-flex;
 		display: -ms-flex;
@@ -49,7 +52,7 @@
 		-ms-justify-content: space-between;
 		justify-content: space-between;
 		background: linear-gradient(180deg, rgba(34, 40, 43, 0.98) 0%, rgba(43, 50, 54, 0.98) 48%, rgba(58, 68, 72, 0.98) 100%), url("images/overlay.png");
-		box-shadow: inset -0.16em 0 0 rgba(255, 255, 255, 0.05), 0 0 0.65em rgba(34, 38, 41, 0.08);
+		box-shadow: inset -0.16em 0 0 rgba(255, 255, 255, 0.05), 0 0 0.65em rgba(var(--bh-shadow-rgb), 0.08);
 		color: #fff;
 		height: 100%;
 		left: 0;
@@ -122,12 +125,6 @@
 			margin: 0.5em 0 0 0;
 		}
 
-		#logo .image {
-			position: absolute;
-			left: 0;
-			top: 0;
-		}
-
 	#nav ul {
 		list-style: none;
 		padding-left: 0;
@@ -167,13 +164,13 @@
 					}
 
 				#nav ul li a:hover {
-					background: rgba(142, 190, 188, 0.1);
+					background: rgba(var(--bh-accent-rgb), 0.1);
 					box-shadow: inset 0 0 0 1px rgba(177, 208, 205, 0.12);
 					color: #f6fbfb;
 				}
 
 				#nav ul li a.active {
-					background: rgba(142, 190, 188, 0.16);
+					background: rgba(var(--bh-accent-rgb), 0.16);
 					box-shadow: inset 0 0 0 1px rgba(190, 221, 218, 0.2), inset 0 0 0.45em 0 rgba(0, 0, 0, 0.08);
 					color: #fff;
 				}
@@ -185,13 +182,21 @@
 /* Footer */
 
 	#footer {
+		/* main.css has a template rule `footer { margin: 2em 0 0 0 }` meant for the
+		   <footer> inside a section (the hero's "See more" block). The page-level
+		   footer started matching it the moment it became a real <footer> element
+		   rather than a <div>, which opened a 38px band of bare page background
+		   above it. #footer (1,0,0) beats footer (0,0,1). */
+		margin-top: 0;
 		margin-left: 375px;
 		text-align: left;
 		background-color: #d7e1df;
 		padding: 0.56em 1.6em 0.62em 1.6em;
-		box-shadow: inset 0 1px 0 0 rgba(71, 98, 96, 0.08), inset 0 0.08em 0.08em 0 rgba(255, 255, 255, 0.35);
-		color: #6c7a79;
-		font-size: 0.48em;
+		box-shadow: inset 0 1px 0 0 rgba(var(--bh-rule-rgb), 0.08), inset 0 0.08em 0.08em 0 rgba(255, 255, 255, 0.35);
+		color: #556160;
+		/* Body is 19/17/16/14pt across the breakpoints; 0.85em keeps the footer
+		   two to three points under it instead of the old 0.48em (~9pt). */
+		font-size: 0.85em;
 	}
 
 		#footer .copyright {
@@ -232,7 +237,7 @@
 		}
 
 			#main > section + section {
-				border-top: solid 1px rgba(71, 98, 96, 0.16);
+				border-top: solid 1px rgba(var(--bh-rule-rgb), 0.16);
 				box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.48), inset 0 0.08em 0.08em 0 rgba(255, 255, 255, 0.24);
 			}
 
@@ -260,18 +265,18 @@
 				}
 
 				#main > section.dark a.button {
-					border-color: #476260;
-					border-bottom-color: #476260;
+					border-color: var(--bh-ink);
+					border-bottom-color: var(--bh-ink);
 				}
 
 					#main > section.dark a.button:hover {
-						border-color: #5c7c79;
-						border-bottom-color: #5c7c79;
+						border-color: var(--bh-accent-deep);
+						border-bottom-color: var(--bh-accent-deep);
 					}
 
 					#main > section.dark a.button:active {
-						border-color: #3d5351;
-						border-bottom-color: #3d5351;
+						border-color: var(--bh-ink-deep);
+						border-bottom-color: var(--bh-ink-deep);
 					}
 
 			#main > section.cover {
@@ -282,7 +287,26 @@
 
 			#main > section.one {
 				background-color: #5d7875;
+				/* The JPEG line is the fallback for browsers without image-set();
+				   the second declaration overrides it wherever image-set() parses. */
 				background-image: url("../../images/banner.jpg");
+				background-image: image-set(url("../../images/banner.webp") type("image/webp"), url("../../images/banner.jpg") type("image/jpeg"));
+			}
+
+			/* The phone hero is a PORTRAIT box (~390x460 CSS px), and background-size:
+			   cover scales to the larger ratio - which here is the height. A
+			   width-reduced 800x320 derivative was therefore stretched 4.3x on a 3x
+			   screen, i.e. blurrier than the full image. The fix is to CROP rather
+			   than scale: 652x768 keeps the full height, matches what
+			   background-position:center was already showing, and lands at the same
+			   1.8x upscale as the 1920px original for a third of the pixels. */
+			@media screen and (max-width: 736px) {
+
+				#main > section.one {
+					background-image: url("../../images/banner-mobile.jpg");
+					background-image: image-set(url("../../images/banner-mobile.webp") type("image/webp"), url("../../images/banner-mobile.jpg") type("image/jpeg"));
+				}
+
 			}
 
 			#main > section.two {
@@ -328,11 +352,6 @@
 @media screen and (min-width: 961px) and (max-width: 1320px) {
 		#header {
 			width: 20%;
-		}
-
-		#logo .image {
-			position: relative;
-			margin: 0 0 0.5em 0;
 		}
 
 		#nav ul li a {
@@ -388,7 +407,7 @@
 			width: 275px;
 			z-index: 10002;
 			background: linear-gradient(180deg, rgba(34, 40, 43, 0.98) 0%, rgba(43, 50, 54, 0.98) 48%, rgba(58, 68, 72, 0.98) 100%), url("images/overlay.png");
-			box-shadow: inset -0.16em 0 0 rgba(255, 255, 255, 0.05), 0 0 0.65em rgba(34, 38, 41, 0.12);
+			box-shadow: inset -0.16em 0 0 rgba(255, 255, 255, 0.05), 0 0 0.65em rgba(var(--bh-shadow-rgb), 0.12);
 		}
 
 			#header .top {
@@ -463,7 +482,7 @@
 					font-size: 18px;
 					background: rgba(60, 70, 74, 0.82);
 					border-radius: 0.35em;
-					box-shadow: 0 0.16em 0.36em rgba(34, 38, 41, 0.18);
+					box-shadow: 0 0.16em 0.36em rgba(var(--bh-shadow-rgb), 0.18);
 					text-align: center;
 					position: absolute;
 					left: 0.5em;
@@ -488,11 +507,30 @@
 			transform: translateX(275px);
 		}
 
+		/* Sliding the header off-screen with a transform moves pixels but leaves
+		   its nine controls in the tab order, so a keyboard user tabs through an
+		   invisible menu before reaching any content while the toggle button
+		   truthfully reports aria-expanded="false". visibility:hidden takes them
+		   out of the tab order; delaying that transition by the length of the
+		   slide keeps the closing animation visible. */
+		body:not(.header-visible) #header {
+			visibility: hidden;
+			-moz-transition: -moz-transform 0.5s ease, visibility 0s linear 0.5s;
+			-webkit-transition: -webkit-transform 0.5s ease, visibility 0s linear 0.5s;
+			-ms-transition: -ms-transform 0.5s ease, visibility 0s linear 0.5s;
+			transition: transform 0.5s ease, visibility 0s linear 0.5s;
+		}
+
 		body.header-visible #header {
+			visibility: visible;
 			-moz-transform: translateX(0);
 			-webkit-transform: translateX(0);
 			-ms-transform: translateX(0);
 			transform: translateX(0);
+			-moz-transition: -moz-transform 0.5s ease, visibility 0s;
+			-webkit-transition: -webkit-transform 0.5s ease, visibility 0s;
+			-ms-transition: -ms-transform 0.5s ease, visibility 0s;
+			transition: transform 0.5s ease, visibility 0s;
 		}
 
 	/* Footer */

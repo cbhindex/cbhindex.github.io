@@ -22,31 +22,35 @@ p.text-left {
 		margin-bottom: 0;
 	}
 
+/* The WebP sources are delivered through <picture>. Taking the wrapper out of
+   the layout keeps every existing `.image img`, `.about-portrait img`,
+   `.research-preview img` and `.gallery-card-media img` rule applying exactly as
+   it did when the <img> was a direct child. */
+
+picture {
+	display: contents;
+}
+
 /* Item */
 
 	.item {
 		background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, #f7fbfa 100%);
-		border: 1px solid rgba(71, 98, 96, 0.14);
+		border: 1px solid rgba(var(--bh-rule-rgb), 0.14);
 		border-radius: 0.95em;
-		box-shadow: 0 0.16em 0.55em 0 rgba(34, 38, 41, 0.06);
+		box-shadow: 0 0.16em 0.55em 0 rgba(var(--bh-shadow-rgb), 0.06);
 		margin-bottom: 30px;
 		overflow: hidden;
 	}
 
-		.item header,
 		.item figcaption {
 			background: linear-gradient(180deg, #fbfdfd 0%, #f1f6f5 100%);
-			border-top: 1px solid rgba(71, 98, 96, 0.08);
-			color: #617170;
+			border-top: 1px solid rgba(var(--bh-rule-rgb), 0.08);
+			color: var(--bh-ink-muted);
 			margin: 0;
 			padding: 0.85em 1.05em 0.85em 1.05em;
 			font-size: 0.8em;
 			line-height: 1.6em;
 		}
-
-			.item header h3 {
-				font-size: 1em;
-			}
 
 	.item figcaption {
 		text-align: left;
@@ -148,4 +152,197 @@ html.reveal-fallback .reveal-fade {
 		transform: none !important;
 		transition: none !important;
 	}
+}
+
+
+/* =========================================================================
+   Print / save-as-PDF.
+
+   Without this the page prints as ~24 sheets of the fixed sidebar and nothing
+   else: the scroll reveal leaves every content section at opacity:0 because
+   print fires no scroll events, and the 375px sidebar reserves a margin on
+   every sheet. Everything below exists to turn the page back into a document.
+   ========================================================================= */
+
+@media print {
+
+	/* 1. Undo the reveal system. Print has no scroll, so .in is never applied
+	      and .reveal-fade would stay at opacity:0 for the whole document. */
+	.js-anim #header,
+	.js-anim #top,
+	.js-anim .reveal,
+	.js-anim .reveal-fade,
+	.js-anim .reveal-fade.in {
+		animation: none !important;
+		opacity: 1 !important;
+		transform: none !important;
+		transition: none !important;
+	}
+
+	/* 2. Navigation is not useful on paper, and the fixed sidebar would repeat
+	      on every sheet while reserving a blank left margin on all of them. */
+	#header,
+	#headerToggle,
+	.gallery-nav {
+		display: none !important;
+	}
+
+	#main,
+	#footer {
+		margin-left: 0 !important;
+	}
+
+	body {
+		background: #fff;
+		color: #1a1a1a;
+		font-size: 11pt;
+	}
+
+	#main > section {
+		background: #fff !important;
+		box-shadow: none;
+		overflow: visible;
+		padding: 1.2em 0;
+	}
+
+	/* 3. The hero is a white heading over a background image that print drops. */
+	#main > section.one {
+		background: none !important;
+		padding: 0 0 1em;
+	}
+
+	.intro-banner,
+	#main > section.dark .intro-banner {
+		background: none !important;
+		color: #1a1a1a;
+		padding: 0;
+	}
+
+	/* The hero's "See more" is navigation and means nothing on paper. The
+	   research buttons are the opposite: they are the citations, so they have to
+	   survive — as a plain list with their targets written out. */
+	#top footer {
+		display: none !important;
+	}
+
+	.research-actions {
+		display: block;
+		margin: 0.5em 0 0.9em;
+	}
+
+	.research-actions .button {
+		background: none !important;
+		border: 0 !important;
+		box-shadow: none !important;
+		color: inherit !important;
+		display: block;
+		font-size: 0.92em;
+		font-weight: 600;
+		height: auto !important;
+		line-height: 1.5;
+		margin: 0 0 0.15em !important;
+		padding: 0 !important;
+		text-align: left;
+	}
+
+	.research-actions .button::after {
+		content: " — " attr(href);
+		font-weight: 400;
+		word-break: break-all;
+	}
+
+	/* 4. Force every collapsed <details> open, and drop the toggles. A reader
+	      cannot click a PDF, so a closed <details> is content that is simply
+	      missing from the printout. Current Chrome hides that content through the
+	      ::details-content pseudo-element rather than by hiding the child, so the
+	      display rule alone is not enough — both are needed, and engines that do
+	      not know the pseudo-element simply ignore it. */
+	.research-details > summary,
+	.news-year > summary,
+	.research-details-collapse {
+		display: none !important;
+	}
+
+	details::details-content {
+		content-visibility: visible !important;
+		block-size: auto !important;
+	}
+
+	.research-details > .research-details-content,
+	.news-year > .news-year-content {
+		content-visibility: visible !important;
+		display: block !important;
+	}
+
+	/* 5. The gallery is a horizontally scrolling strip of 24 nodes, two thirds
+	      of which are aria-hidden clones. Drop the clones and let the real cards
+	      wrap into a grid. */
+	.gallery-carousel {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		padding: 0 !important;
+	}
+
+	.gallery-viewport {
+		overflow: visible !important;
+	}
+
+	/* gallery.css is loaded after this file, so these need !important to win. */
+	.gallery-track {
+		display: flex !important;
+		flex-wrap: wrap !important;
+		gap: 0.7rem !important;
+		width: auto !important;
+	}
+
+	.gallery-card[data-gallery-clone] {
+		display: none !important;
+	}
+
+	.gallery-card {
+		flex: 0 1 auto !important;
+		height: auto !important;
+		max-width: 31% !important;
+		width: 31% !important;
+	}
+
+	.gallery-card-media img {
+		max-height: none !important;
+		width: 100% !important;
+	}
+
+	/* 6. A printed link is a dead end unless its target is written out. */
+	/* Write out the target only where the link IS the reference. Doing it for
+	   every inline lab homepage buries the prose in URLs longer than the sentence
+	   they sit in. */
+	.news-list a[href^="http"]::after,
+	.research-details-content a[href^="http"]::after {
+		content: " (" attr(href) ")";
+		font-size: 0.8em;
+		word-break: break-all;
+	}
+
+	/* 7. Keep units of meaning on one sheet — but only ones that can actually
+	      fit on a sheet. A research card with its details expanded is taller than
+	      a page, and asking the engine not to break it just leaves a near-empty
+	      sheet before it. */
+	.item,
+	figure,
+	.about-meta-block,
+	.research-meta-block,
+	.gallery-card {
+		break-inside: avoid;
+		page-break-inside: avoid;
+	}
+
+	h2,
+	h3 {
+		break-after: avoid;
+		page-break-after: avoid;
+	}
+
+	a {
+		color: inherit;
+	}
+
 }

@@ -1,8 +1,28 @@
+/* Section thesis: states once, above the cards, what the strands have in common,
+   so that no individual card has to keep restating it. */
+
+p.research-intro {
+	color: var(--bh-body);
+	font-size: 1.05em;
+	line-height: 1.7em;
+	margin-bottom: 2.1em;
+	max-width: 44em;
+}
+
+@media screen and (max-width: 736px) {
+
+	p.research-intro {
+		font-size: 1em;
+		margin-bottom: 1.6em;
+	}
+
+}
+
 .research-card {
 	background: linear-gradient(180deg, rgba(248, 251, 251, 0.98) 0%, #fff 18%);
-	border: 1px solid rgba(71, 98, 96, 0.16);
+	border: 1px solid rgba(var(--bh-rule-rgb), 0.16);
 	border-radius: 1em;
-	box-shadow: 0 0.2em 0.9em 0 rgba(34, 38, 41, 0.08);
+	box-shadow: 0 0.2em 0.9em 0 rgba(var(--bh-shadow-rgb), 0.08);
 	margin-bottom: 2.1em;
 	overflow: hidden;
 	padding: 1.95em 2em 1.8em;
@@ -11,7 +31,7 @@
 }
 
 .research-card::before {
-	background: linear-gradient(90deg, #6f9694 0%, #8ebebc 55%, #d8eae9 100%);
+	background: linear-gradient(90deg, #6f9694 0%, var(--bh-accent) 55%, #d8eae9 100%);
 	border-radius: inherit;
 	content: '';
 	height: 0.35em;
@@ -36,7 +56,7 @@
 }
 
 .research-card-header {
-	border-bottom: 1px solid rgba(71, 98, 96, 0.12);
+	border-bottom: 1px solid rgba(var(--bh-rule-rgb), 0.12);
 	margin-bottom: 0.75em;
 	padding-bottom: 0.75em;
 }
@@ -46,7 +66,7 @@
 }
 
 .research-card-header .section-heading strong {
-	color: #314846;
+	color: var(--bh-ink-strong);
 }
 
 .research-tags {
@@ -65,11 +85,12 @@
 }
 
 	.research-tags li {
+		white-space: nowrap;
 		background: rgba(255, 255, 255, 0.78);
-		border: 1px solid rgba(71, 98, 96, 0.22);
+		border: 1px solid rgba(var(--bh-rule-rgb), 0.22);
 		border-radius: 0.45em;
 		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
-		color: #476260;
+		color: var(--bh-ink);
 		font-size: 0.68em;
 		font-weight: 700;
 		letter-spacing: 0.08em;
@@ -83,8 +104,8 @@
 }
 
 .research-preview {
-	background: #f8fbfb;
-	border: 1px solid rgba(71, 98, 96, 0.12);
+	background: var(--bh-surface);
+	border: 1px solid rgba(var(--bh-rule-rgb), 0.12);
 	border-radius: 0.9em;
 	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 	float: right;
@@ -110,12 +131,30 @@
 }
 
 .research-preview figcaption {
-	color: #617170;
+	color: var(--bh-ink-muted);
 	font-size: 0.72em;
 	font-weight: 600;
 	line-height: 1.5em;
 	margin-top: 0.65em;
 	text-align: left;
+}
+
+/* Between 961px and ~1120px the card is ~684-795px wide while .research-preview
+   claims min-width:16em plus its margin, leaving roughly 330px for the copy
+   column. That is enough for the summary, but not for the tag row, which
+   degenerates to one pill per line. Below 961px the float is already dropped;
+   this extends that behaviour up through the band where it is needed. */
+
+@media screen and (min-width: 961px) and (max-width: 1120px) {
+
+	.research-preview {
+		float: none;
+		margin: 0 0 1em 0;
+		max-width: none;
+		min-width: 0;
+		width: 100%;
+	}
+
 }
 
 .research-meta-grid {
@@ -126,10 +165,10 @@
 }
 
 .research-meta-block {
-	background: linear-gradient(180deg, #fff 0%, #f8fbfb 100%);
-	border: 1px solid rgba(71, 98, 96, 0.14);
+	background: linear-gradient(180deg, #fff 0%, var(--bh-surface) 100%);
+	border: 1px solid rgba(var(--bh-rule-rgb), 0.14);
 	border-radius: 0.85em;
-	box-shadow: 0 0.08em 0.24em 0 rgba(34, 38, 41, 0.04);
+	box-shadow: 0 0.08em 0.24em 0 rgba(var(--bh-shadow-rgb), 0.04);
 	padding: 0.8em 0.9em 0.85em;
 }
 
@@ -138,7 +177,7 @@
 	}
 
 .research-meta-label {
-	color: #476260;
+	color: var(--bh-ink);
 	font-size: 0.7em;
 	font-weight: 700;
 	letter-spacing: 0.1em;
@@ -147,14 +186,14 @@
 }
 
 .research-meta-block p.text-left {
-	color: #617170;
+	color: var(--bh-ink-muted);
 	font-size: 0.88em;
 	line-height: 1.5em;
 	margin-bottom: 0;
 }
 
 .research-points {
-	color: #617170;
+	color: var(--bh-ink-muted);
 	font-size: 0.88em;
 	line-height: 1.5em;
 	margin-bottom: 0;
@@ -184,9 +223,9 @@
 }
 
 .research-button {
-	background-color: #476260;
+	background-color: var(--bh-ink);
 	background-image: none;
-	border: 1px solid #476260;
+	border: 1px solid var(--bh-ink);
 	border-radius: 0.65em;
 	box-shadow: none;
 	font-size: 0.72em;
@@ -197,15 +236,15 @@
 }
 
 .research-button:hover {
-	background-color: #5c7c79;
+	background-color: var(--bh-accent-deep);
 }
 
 .research-button:active {
-	background-color: #3d5351;
+	background-color: var(--bh-ink-deep);
 }
 
 .research-details {
-	border-top: 1px solid rgba(71, 98, 96, 0.14);
+	border-top: 1px solid rgba(var(--bh-rule-rgb), 0.14);
 	margin-top: 1.45em;
 	padding-top: 1.1em;
 }
@@ -215,11 +254,11 @@
 	-webkit-align-items: center;
 	-ms-align-items: center;
 	align-items: center;
-		background: rgba(142, 190, 188, 0.12);
-		border: 1px solid rgba(71, 98, 96, 0.25);
+		background: rgba(var(--bh-accent-rgb), 0.12);
+		border: 1px solid rgba(var(--bh-rule-rgb), 0.25);
 		border-radius: 0.65em;
 		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
-	color: #476260;
+	color: var(--bh-ink);
 	cursor: pointer;
 	display: -moz-inline-flex;
 	display: -webkit-inline-flex;
@@ -251,6 +290,13 @@
 		content: '-';
 	}
 
+	/* The identical control in the news archive has had this since it was
+	   written (news.css); without it, tabbing to 'Show details' shows nothing. */
+	.research-details summary:focus-visible {
+		outline: 3px solid var(--bh-accent);
+		outline-offset: 3px;
+	}
+
 .details-label-open {
 	display: none;
 }
@@ -276,11 +322,11 @@
 	-webkit-align-items: center;
 	-ms-align-items: center;
 	align-items: center;
-	background: rgba(142, 190, 188, 0.12);
-	border: 1px solid rgba(71, 98, 96, 0.25);
+	background: rgba(var(--bh-accent-rgb), 0.12);
+	border: 1px solid rgba(var(--bh-rule-rgb), 0.25);
 	border-radius: 0.65em;
 	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
-	color: #476260 !important;
+	color: var(--bh-ink) !important;
 	cursor: pointer;
 	display: -moz-inline-flex;
 	display: -webkit-inline-flex;
@@ -298,8 +344,8 @@
 }
 
 	.research-details-collapse:hover {
-		background: rgba(142, 190, 188, 0.2);
-		border-color: rgba(71, 98, 96, 0.25);
+		background: rgba(var(--bh-accent-rgb), 0.2);
+		border-color: rgba(var(--bh-rule-rgb), 0.25);
 	}
 
 	.research-details-collapse .details-collapse-icon::before {
