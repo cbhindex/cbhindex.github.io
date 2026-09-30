@@ -414,7 +414,7 @@
 													/>
 												</picture>
 											</span>
-											<figcaption>Representative tiles from one model-derived phenotype (haemorrhagic and necrotic).</figcaption>
+											<figcaption>Representative tiles from one model-derived phenotype (dense tumour).</figcaption>
 										</figure>
 
 										<ul class="research-tags" aria-label="Research topics">
@@ -424,7 +424,7 @@
 											<li>Molecular Correlates</li>
 										</ul>
 
-										<p class="text-left research-summary">A molecular test tells you that a tumour carries an alteration; it does not tell you where in the tissue that alteration shows itself. I build weakly supervised models that predict molecular status from routine H&amp;E slides and then decompose the prediction into morphological sub-populations a pathologist can inspect and name. The aim is not a stronger classifier but a readable one, producing evidence that can be located on the slide, reviewed, and disagreed with.</p>
+										<p class="text-left research-summary">A molecular test tells you that a tumour carries an alteration; it does not tell you where in the tissue that alteration shows itself. I build weakly supervised models that predict molecular status from routine H&amp;E slides and link each prediction to morphological sub-populations a pathologist can inspect and name. The aim is not a stronger classifier but a readable one, producing evidence that can be located on the slide, reviewed, and disagreed with.</p>
 									</div>
 								</div>
 
@@ -453,7 +453,7 @@
 										<span class="details-label-open">Hide details</span>
 									</summary>
 									<div class="research-details-content">
-										<p class="text-left">MYCN amplification has been a prognostic marker in paediatric neuroblastoma for decades, but it is assayed in bulk &mdash; alongside the heterogeneous tissue architecture a pathologist actually assesses, rather than within it. That leaves a gap in both directions: MYCN status alone cannot localise MYCN-associated biology, and morphology alone cannot assign molecular risk. Pheno-MYCN closes the gap from the image side, linking slide-level MYCN prediction to interpretable morphological sub-populations on routine H&amp;E whole-slide images.</p>
+										<p class="text-left">MYCN amplification has been a prognostic marker in paediatric neuroblastoma for decades, and it is accompanied by morphological changes that signal high-risk disease. Yet quantitative assessment of that morphology stops at what pathologists can reliably count, the mitosis-karyorrhexis index; other high-risk features, such as nuclear size, pleomorphism and anaplasia, lack formal criteria. That leaves a gap: the index can neither capture the full morphological landscape of high-risk biology nor show where in the tumour it lies. Pheno-MYCN is built to address that gap, linking slide-level MYCN prediction to interpretable morphological sub-populations on routine H&amp;E whole-slide images.</p>
 
 										<div class="row aln-center aln-middle media-row">
 											<div class="col-10 col-12-mobile">
@@ -471,14 +471,14 @@
 															/>
 														</picture>
 													</span>
-													<figcaption>The five phenotypes Pheno-MYCN resolves across the cohort. For each, three representative tiles and a whole-slide thumbnail sit beside its composition, median survival, MYCN-amplification rate and relative enrichment. The clustered heat map in the centre separates the two MYCN-enriched phenotypes, haemorrhagic and necrotic, from the three that sit at the cohort baseline.</figcaption>
+													<figcaption>The five groups that emerge when all 189 slides are clustered, blind to MYCN status, by their mix of four tumour-associated Pheno-MYCN phenotypes. For each, three representative tiles and a whole-slide thumbnail sit beside its composition, median survival, MYCN-amplification rate and relative phenotype enrichment. The clustered heat map in the centre separates the two necrosis-rich groups (haemorrhagic &amp; necrotic; necrotic), which are enriched for MYCN amplification, from the three that are not.</figcaption>
 												</figure>
 											</div>
 										</div>
 
-										<p class="text-left">Across 189 slides, the framework resolves each into phenotypic clusters that expert pathology review maps onto recognised neuroblastoma morphologies. Cell-level profiling then shows that MYCN amplification marks every sub-population, but through a different feature in each: densely cellular yet disorganised tumour with sparser, less diverse cellular networks, and a disproportionate presence in necrotic and haemorrhagic regions. MYCN-amplified-like tissue is identifiable per slide from those features alone, and can be traced as a continuous gradient within a tumour rather than as a single label attached to the whole case.</p>
+										<p class="text-left">Across 189 slides, the framework resolves each into phenotypic clusters that expert pathology review maps onto recognised neuroblastoma morphologies. Cell-level profiling then shows that MYCN amplification marks every sub-population, but through a different feature in each: densely cellular yet disorganised tumour with sparser, less diverse cellular networks, and, for haemorrhagic and acellular necrosis, chiefly their greater abundance in amplified tumours. MYCN-amplified-like tissue is identifiable per slide from cell-level features alone, and can be traced as a continuous gradient within a tumour rather than as a single label attached to the whole case.</p>
 
-										<p class="text-left">The point of the prediction task here is diagnostic rather than competitive. A stronger classifier that cannot show its working is of limited use to a reporting pathologist; a model whose evidence can be pointed at on the slide can be checked, challenged, and eventually trusted. That matters most where molecular testing is constrained by cost or turnaround, which is where a readable H&amp;E signal has the most to offer.</p>
+										<p class="text-left">Here the prediction task is a probe of MYCN biology rather than an end in itself. A stronger classifier that cannot show its working is of limited use to a reporting pathologist; a model whose evidence can be pointed at on the slide can be checked, challenged, and eventually trusted. That matters most where molecular testing is delayed, limited or unavailable: there, a readable H&amp;E signal could help triage cases for confirmatory FISH rather than replace it.</p>
 									</div>
 								</details>
 							</article>
@@ -789,6 +789,7 @@
 									<summary><span>2026</span></summary>
 									<div class="news-year-content">
 										<ul class="text-left news-list">
+											<li>Sept. 2026, I was selected for <a href="https://www.anthropic.com/news/rare-disease-research-grants" target="_blank" rel="noopener noreferrer">Anthropic's AI for Science Rare Disease Research Program</a>, with US$50,000 in Claude usage credits.</li>
 											<li>Aug. 2026, I was appointed Honorary Research Fellow at the <a href="https://www.ucl.ac.uk/medical-physics-biomedical-engineering/" target="_blank" rel="noopener noreferrer">UCL Department of Medical Physics and Biomedical Engineering</a>.</li>
 											<li>Aug. 2026, I joined the reviewer panel for 1-page abstracts at the <a href="https://bhi.embs.org/2026/" target="_blank" rel="noopener noreferrer">IEEE-EMBS International Conference on Biomedical and Health Informatics (BHI 2026)</a>.</li>
 											<li>Jun. 2026, I chaired Session Two (<i>GenAI in Biology and Health</i>) at the Predictive Cell Symposium, ICR.</li>
